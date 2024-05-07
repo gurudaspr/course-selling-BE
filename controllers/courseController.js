@@ -57,23 +57,24 @@ export const createCourse = async (req, res) => {
 
 
 
-export const updateCourse = async (req, res) => {
+  export const updateCourse = async (req, res) => {
     const id = req.params.id;
-
+    const { description, price, instructor } = req.body;
+  
     const updatedCourse = await Course.findOneAndUpdate(
-        { _id: id },
-        { description, price, instructor },
-        {
-            new: true,
-        }
+      { _id: id },
+      { description, price, instructor },
+      {
+        new: true,
+      }
     );
-
+  
     if (!updatedCourse) {
-        return res.send("Course is not updated");
+      return res.send("Course is not updated");
     }
     console.log(updatedCourse);
     return res.send(updatedCourse);
-};
+  };
 
 
 export const deleteCourse = async (req, res) => {
