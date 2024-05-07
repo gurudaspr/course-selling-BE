@@ -1,11 +1,18 @@
-import jsonwebtoken from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import dotenv from 'dotenv';
 
 dotenv.config();
 const secretKey = process.env.SE;
 
 const generateToken = (email) => {
-    return jsonwebtoken.sign({ data: email }, secretKey, { expiresIn: '1d' });
+    return jwt.sign({ data: email }, secretKey, { expiresIn: '1d' });
 };
 
 export default generateToken;
+
+
+export const adminToken = (user) => {
+    return jwt.sign({ data: user.id, role: user.role }, secretKey, {
+      expiresIn: "1d",
+    });
+  };

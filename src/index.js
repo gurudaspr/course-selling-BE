@@ -3,12 +3,20 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import { connect } from "../config/db.js";
 import userRouter from "../routes/userRouter.js";
+import courseRouter from "../routes/courseRouter.js";
+import upload from "../middleware/upload-middleware.js";
+import instructorRouter from "../routes/instructorRouter.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
+
 app.use("/api/v1/user", userRouter);
+app.use("/api/v1/course", courseRouter);
+app.use("/api/v1/instructor", instructorRouter);
 
 const port = 3000;
 connect();
